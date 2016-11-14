@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%
+      if(sess) {
+    %>
+        <h1><%=sess.name%></h1>
+    <%
+      }
+    %>
+    <h1>blog</h1>
+    <input type="button" name="name" value="글쓰기" onclick="location.href='/write'">
+    <input type="button" name="name" value="게시판" onclick="location.href='/list/1'">
+    <input type="button" name="name" value="회원가입" onclick="location.href='/signup'">
+    <input type="button" name="name" value="로그인" onclick="location.href='/login'">
+    <input type="button" name="name" value="로그아웃" onclick="location.href='/logout'">
+  </body>
+</html>

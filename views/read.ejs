@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Coding Bolog</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link href="/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+  </head>
+  <body>
+    <%
+      if(sess) {
+    %>
+        <h1><%=sess.name%></h1>
+    <%
+      }
+    %>
+    <form action="/update/<%=rows.idx%>" method="get">
+        <table border="1" class="table">
+            <tr>
+              <th>작성자</th>
+              <th name="name"><%=rows.name%></th>
+            </tr>
+            <tr>
+              <td>제목</td>
+              <td name="title"><%=rows.title%></td>
+            </tr>
+            <tr>
+              <td>작성일</td>
+              <td name="update_date"><%=rows.update_date%></td>
+            </tr>
+            <tr>
+              <td>조회수</td>
+              <td name="hit"><%=rows.hit%></td>
+            </tr>
+            <tr>
+              <td colspan="2" name="content" class="conversion"><%=rows.content%></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <% if(sess.idx === rows.user_idx) { %>
+                    <button type="submit" class="btn btn-primary">글 수정</button>
+                    <button type="button" class="btn btn-primary" onclick="checkDelete()">글 삭제</button>
+                    <% } %>
+                    <button type="button" class="btn btn-default" onclick="history.back()">목록으로</button>
+                </td>
+            </tr>
+        </table>
+    </form><br/><br/>
+
+    <form method="post" onsubmit="return checkSubmit()">
+      <div class="form-group">
+        <input type="hidden" id="ip" name="ip">
+        <input type="hidden" name="name" value="<%=sess.name%>">
+        <input type="hidden" name="counts" value="<%=rows.counts%>">
+        <textarea id="comment" name="comment"></textarea>
+      </div>
+      <input type="submit" value="완료">
+    </form><br/><br/><br/>
+
+      <%
+        if(comments) {
+          for(var i = 0; i < comments.length; i++) {
+            var oneItem = comments[i];
+      %>
+      <table class="table">
+          <tr>
+            <th>작성자</th>
+            <th><%=oneItem.name%></th>
+            <th>작성일</th>
+            <th><%=oneItem.update_date%></th>
+          </tr>
+          <tr>
+            <td colspan="5" class="conversion"><%=oneItem.comment%></td>
+          </tr>
+      </table>
+      <% }} %>
+      <script>
+        $('.conversion').each(function(){
+          var $this = $(this);
+          var t = $this.text();
+          $this.html(t.replace('&lt','<').replace('&gt', '>').replace('<script>','&ltscript&gt'));
+        });
+
+        // 글쓰기 양식 확인
+        function checkSubmit() {
+          // ckeditor 본문내용 공백체크
+          if ($("#cke_1_contents iframe").contents().find("body").text().trim() == "") {
+            var message = "본문 내용을 입력해 주세요";
+            alert(message);
+            console.log($("#cke_1_contents iframe").contents().find("body").text());
+            return false;
+          }
+          return true;
+        }
+
+        // ckeditor사용코드
+        CKEDITOR.replace('comment');
+
+        // 사용자 아이피주소 받기
+        document.getElementById('ip').value = ip();
+
+        function checkDelete() {
+          if (confirm("정말 삭제하시겠습니까??") == true){
+              location.href='/delete/<%=rows.idx%>'
+          }
+        }
+      </script>
+  </body>
+</html>

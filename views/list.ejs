@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <title>Coding Bolog</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <%
+      if(sess) {
+    %>
+        <h1><%=sess.name%></h1>
+    <%
+      }
+    %>
+    <table border="1" class="table">
+        <tr>
+            <td>번호</td>
+            <td>작성자</td>
+            <td>제목</td>
+            <td>조회수</td>
+            <td>변경일</td>
+        </tr>
+
+        <%
+          for(var i = 0; i < rows.length; i++) {
+            var oneItem = rows[i];
+            if(rows[0].is_delete != 1) {
+        %>
+              <tr>
+                  <td>
+                      <%=oneItem.idx%>
+                  </td>
+                  <td>
+                      <%=oneItem.name%>
+                  </td>
+                  <td>
+                      <%=oneItem.tag%>
+                      <a href="/read/<%=oneItem.idx%>/<%=oneItem.hit%>">
+                          <%=oneItem.title%> [<%=oneItem.counts%>]
+                  </td>
+                  <td>
+                      <%=oneItem.hit%>
+                  </td>
+                  <td>
+                      <%=oneItem.update_date%>
+                  </td>
+              </tr>
+      <% }} %>
+      <tr>
+        <td align="center" colspan="5">
+          <a href="/list/1"><<<</a>
+          <a href="/list/<%=page - 1%>">이전</a>
+          <%
+            for(i = startPage; i <= endPage; i++) {
+              if(rows[0].is_delete != 1) {
+              if(page == i) { %>
+                [<%=i%>] <%
+              } else { %>
+                <a href="/list/<%=i%>">[<%=i%>]</a>
+          <%  }}} %>
+          <a href="/list/<%=page + 1%>">다음</a>
+          <a href="/list/<%=totalPage%>">>>></a>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
