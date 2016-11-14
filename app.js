@@ -35,7 +35,7 @@ app.listen(3000, function(){
 // mysql config
 var mysqlClient = mysql.createConnection({
   user:'root',
-  password:'870915',
+  password:'1234',
   database : 'blog'
 });
 
@@ -120,11 +120,7 @@ passport.use('facebook',
             done(null, result[0]);
           }
         });
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> b5a9c12c77750a64c98d78dce0c78ba1f2d9672c
     }
 ));
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -159,10 +155,10 @@ passport.use('google',
 ));
 
 var isAuthenticated = function(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	res.redirect('/login');
+   if(req.isAuthenticated()){
+      return next();
+   }
+   res.redirect('/login');
 };
 
 // login router
@@ -194,22 +190,14 @@ app.post('/sign-up', function(req, res, next){
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
-<<<<<<< HEAD
 app.get('/auth/facebook/callback',
-=======
-app.get('/auth/facebook/callback', 
->>>>>>> b5a9c12c77750a64c98d78dce0c78ba1f2d9672c
   passport.authenticate('facebook',{
     successRedirect : '/',
     failureRedirect : '/fail'
 }));
 
 app.get('/auth/google', passport.authenticate('google', {scope: ['email']}));
-<<<<<<< HEAD
 app.get('/auth/google/callback',
-=======
-app.get('/auth/google/callback', 
->>>>>>> b5a9c12c77750a64c98d78dce0c78ba1f2d9672c
   passport.authenticate('google',{
     successRedirect : '/',
     failureRedirect : '/fail'

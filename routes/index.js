@@ -9,7 +9,7 @@ var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     database: 'blog',
-    password: '870915'
+    password: '1234'
 });
 
 // 세션 체크 함수
@@ -23,15 +23,8 @@ function checkSession(req) {
 
 //메인 페이지
 router.get('/', function(req, res, next) {
-<<<<<<< HEAD
   var sess = checkSession(req);
   res.render('index', {sess: sess});
-=======
-  if(req.session.passport) {
-    var sess = req.session.passport;
-  }
-  res.render('index');
->>>>>>> b5a9c12c77750a64c98d78dce0c78ba1f2d9672c
 });
 
 // 게시판 목록 불러오는 페이지
@@ -98,15 +91,8 @@ router.get('/list/:page', function(req,res,next) {
 
 // 글쓰기 화면 표시 GET
 router.get('/write', function(req, res, next){
-<<<<<<< HEAD
     var sess = checkSession(req);
-=======
-    if(req.session.passport) {
-      var sess = req.session.passport;
-    }
->>>>>>> b5a9c12c77750a64c98d78dce0c78ba1f2d9672c
     res.render('write',{sess: sess});
-    console.log("write : " + sess);
 });
 
 // 글쓰기 로직 처리 POST
