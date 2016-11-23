@@ -30,5 +30,6 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// 코드 스니펫 삽입
 	config.extraPlugins = 'codesnippet';
-
+	config.filebrowserUploadUrl = '/uploader';
+	config.uiColor = '#EEEEEE';
 };

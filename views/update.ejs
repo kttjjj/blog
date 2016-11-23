@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Coding Bolog</title>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link href="/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/ckeditor/ckeditor.js"></script>
+    <%include ./include/head_include.ejs %>
+    <%include ./include/ckeditor_include.ejs %>
     <script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+    <link rel="stylesheet" href="/stylesheets/list.css">
   </head>
   <body>
+    <%include ./include/index_include.ejs%>
     <form action="/update" method="post" onsubmit="return checkSubmit()">
       <input type="hidden" name="idx" value="<%=row.idx%>"/>
       <input type="hidden" id="ip" name="ip">
       <input type="hidden" class="form-control" name="name" value="<%= row.name %>">
       <input type="hidden" name="hit" value="<%=row.hit%>">
+      <input type="hidden" name="page" value="<%=page%>">
       <div class="form-group">
         <label>제목</label>
         <input type="text" class="form-control" name="title" value="<%= row.title %>">

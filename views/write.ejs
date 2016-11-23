@@ -1,60 +1,108 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Coding Bolog</title>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link href="/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/ckeditor/ckeditor.js"></script>
+    <%include ./include/head_include.ejs %>
+    <%include ./include/ckeditor_include.ejs %>
     <script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+    <link rel="stylesheet" href="/stylesheets/list.css">
   </head>
   <body>
-    <%
-      if(sess) {
-    %>
-        <h1><%=sess.name%></h1>
-        <h1><%=sess.idx%></h1>
-    <%
-      }
-    %>
-    <form method="post" onsubmit="return checkSubmit()">
-        <input type="hidden" id="ip" name="ip">
-        <input type="hidden" id="date" name="date">
-        <input type="hidden" name="name" value="<%=sess.name%>">
-        <input type="hidden" name="user_idx" value="<%=sess.idx%>">
-        <div class="form-group">
-            <label>카테고리</label>
-            <select class="form-control" name="tag">
-              <option value="1">Nodejs</option>
-              <option value="2">JAVA</option>
-              <option value="3">PHP</option>
-              <option value="4">JSP</option>
-              <option value="5">MTML</option>
-              <option value="6">Css</option>
-              <option value="7">javascript</option>
-              <option value="8">jquery</option>
-              <option value="9">python</option>
-              <option value="10">angularjs</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>제목</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
-        </div>
-        <div class="form-group">
-            <label>내용</label>
-            <textarea id="content" name="content"></textarea>
-        </div>
-        <button type="submit" class="btn btn-default">완료</button>
-    </form>
+    <%include ./include/index_include.ejs%>
+    <div class="container-fluid">
+      <div class="write-row">
+        <form method="post" onsubmit="return checkSubmit()">
+            <input type="hidden" id="ip" name="ip">
+            <input type="hidden" name="name" value="<%=sess.name%>">
+            <input type="hidden" name="user_idx" value="<%=sess.idx%>">
+            <input type="hidden" name="tag" id="tag">
+            <div class="form-group name">
+              <label>카테고리</label>
+
+              <div id="beforeoutput">
+
+              </div>
+              <div id="tagoutput" class="tagoutput">
+
+              </div>
+              <input type="text" class="form-control" placeholder="test" id="taginput" onkeypress="tagsearcher(event)">
+
+            </div>
+            <div class="form-group hit">
+                <label>제목</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
+            </div>
+            <div class="form-group date">
+                <label>내용</label>
+                <textarea id="content" name="content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">완료</button>
+        </form>
+      </div>
+    </div>
 
     <script>
+    var tagList = [];
+    var outTagList = [];
+    <% for(i=0; i< tag.length; i++){%>
+      tagList.push("<%=tag[i].type%>");
+    <% } %>
+
+
+      function tagsearcher(e){
+        
+        var input = document.getElementById("taginput").value;
+        var text = "";
+        var textvalue = "";
+
+        document.getElementById("beforeoutput").innerHTML = input;
+        if(window.event.keyCode == 13){
+            event.preventDefault();     // 기본 등록되있는 모든 이벤트 삭제
+            for(var i in tagList){
+
+              if(tagList[i].match(input) != null){
+                var check = tagList[i].match(input);
+                var checked = false;
+                for(var j in outTagList){
+                  if(outTagList[j] == check.input){
+                    checked = true;
+                    break;
+                  }
+                }
+                if(!checked){
+                  outTagList.push(tagList[i]);
+                  document.getElementById('taginput').value = "";
+                  document.getElementById('taginput').focus();
+                  
+                }
+              }
+            }
+            console.log(outTagList);
+            for(var i in outTagList){
+              text +="<button type='button' class='btn btn-primary' id='tagbtn_"+i+"' onclick='deletetag(this)'>"+outTagList[i]+"</button>";
+              textvalue += "#"+outTagList[i];
+            }
+            document.getElementById("tagoutput").innerHTML = text;
+            document.getElementById('tag').value = textvalue;
+        }
+      };
+
+      function deletetag(obj){
+        var text = "";
+        var textvalue = "";
+        var btnary = obj.id.split('_');
+        btnidx = btnary[1];
+        console.log(btnidx);
+        outTagList.splice(btnidx, 1);
+
+        for(var i in outTagList){
+              text +="<button type='button' class='btn btn-primary' id='tagbtn_"+i+"' onclick='deletetag(this)'>"+outTagList[i]+"</button>";
+              textvalue += "#"+outTagList[i];
+            }
+        document.getElementById("tagoutput").innerHTML = text;
+      };
+
+
+
       // 글쓰기 양식 확인
       function checkSubmit() {
         if ($("#title").val().trim() == "") {
@@ -80,8 +128,7 @@
 
       // 사용자 아이피주소 받기
       document.getElementById('ip').value = ip();
-      // 현재 날짜 받아서 넣어주기
-      document.getElementById('date').value = Date();
+
     </script>
 </body>
 

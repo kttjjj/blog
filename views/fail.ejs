@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+	<%include ./include/head_include.ejs %>
 </head>
 <body>
 	login fail
+	<% if (message.length > 0) { %>
+		<%= message %>
+			<% } %>
 </body>
 </html>
