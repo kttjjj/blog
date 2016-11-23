@@ -1,0 +1,12 @@
+<div class="fixed">
+  <h1>blog</h1>
+    <input class="button left" type="button" name="name" value="게시판" onclick="location.href='/list/1'">
+    <input class="button left" type="button" name="name" value="글쓰기" onclick="location.href='/write'">
+    <%
+      if(sess){
+    %>
+        <input class="button" type="button" name="name" value="로그아웃" onclick="location.href='/logout'">
+      <% } else { %>
+        <input class="button" type="button" name="name" value="로그인" onclick="location.href='/login'">
+      <% } %>
+</div>

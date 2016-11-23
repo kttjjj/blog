@@ -1,0 +1,132 @@
+body, html{
+    height: 100%;
+}
+.title-wrapper{
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+.list-wrapper{
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+.text-center{
+    text-align: center;
+}
+.input-text{
+    width: 200px;
+    display: inline;
+    height: 30px;
+}
+.input-button{
+    padding: 3px;
+}
+.select-size{
+    width: 100px;
+    display: inline;
+    padding: 0px;
+}
+.fixed{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #C7CAFF;
+    z-index: 9999;
+    text-align: center;
+    padding-right: 150px;
+    padding-left: 150px;
+}
+.list-title{
+    color: #928367;
+}
+.list-title>a{
+    color: #ce6700;
+}
+.container-fluid{
+    background-color: #D7D8EC;
+    margin: 0px;
+    width: 100%;
+    margin-top: 95px;
+}
+.idx{
+    color: #6089b4;
+}
+.name{
+    color: #d0b344;
+}
+.hit{
+    color: #9aa82d;
+}
+.date{
+    color: #987295;
+}
+.fixed>h1{
+    color: white;
+    font-size: 80px;
+}
+.button{
+    background-color: #607a80;
+    color: white;
+    float: right;
+    margin-right: 8px;
+}
+.title{
+    color: #ce6700;
+}
+.row{
+    padding-top: 70px;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+.left{
+    float: left;
+}
+.login-row{
+    padding-top: 300px;
+    background-color: #D7D8EC;
+    height: 100%;
+
+}
+.modal-dialog{
+    width:380px;
+}
+.modal-body{
+	padding-left: 35px;
+	padding-right: 35px;
+}
+.modal-body input{
+    width: 300px;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 3px;
+    padding-left: 10px;
+}
+.modal-footer{
+    text-align: center;
+}
+.modal-footer button{
+    width:150px;
+    height: 40px;
+}
+.write-row{
+    margin-top: 150px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+.login-form{
+    width: 250px;
+    /*position: relative;
+    left: 50%;
+    margin-left: -190px;*/
+    margin: 0px auto;
+}
+.oauth-btnBox{
+    margin-top: 5px;
+}
+.login-pass{
+    margin-top: 5px;
+}
