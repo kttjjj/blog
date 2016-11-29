@@ -7,73 +7,75 @@
     <link rel="stylesheet" href="/stylesheets/list.css">
   </head>
   <body>
-    <%include ./include/index_include.ejs%>
-    <form action="/update/<%=rows.idx%>/<%=page%>" method="get">
-        <table border="1" class="table">
+    <%include index.ejs%>
+      <div class="container-fluid">
+      <form action="/update/<%=rows.idx%>/<%=page%>" method="get">
+          <table border="1" class="table">
+              <tr>
+                <th>작성자</th>
+                <th name="name"><%=rows.name%></th>
+              </tr>
+              <tr>
+                <td>제목</td>
+                <td name="title"><%=rows.title%></td>
+              </tr>
+              <tr>
+                <td>작성일</td>
+                <td name="update_date"><%=rows.update_date%></td>
+              </tr>
+              <tr>
+                <td>조회수</td>
+                <td name="hit"><%=rows.hit%></td>
+              </tr>
+              <tr>
+                <td colspan="2" name="content" class="conversion"><%=rows.content%></td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      <% if(sess.idx === rows.user_idx) { %>
+                      <button type="submit" class="btn btn-primary">글 수정</button>
+                      <button type="button" class="btn btn-primary" onclick="checkDelete()">글 삭제</button>
+                      <% }
+                      if(page){ %>
+                        <button type="button" class="btn btn-default" onclick="location.href='/list/<%=page%>'">목록으로</button>
+                      <% } else { %>
+                      <button type="button" class="btn btn-default" onclick="location.href='/list/1'">목록으로</button>
+                      <% } %>
+                  </td>
+              </tr>
+          </table>
+      </form><br/><br/>
+
+      <form method="post" onsubmit="return checkSubmit()">
+        <div class="form-group">
+          <input type="hidden" id="ip" name="ip">
+          <input type="hidden" name="name" value="<%=sess.name%>">
+          <input type="hidden" name="counts" value="<%=rows.counts%>">
+          <input type="hidden" name="email" value="<%=email%>">
+          <input type="hidden" name="link" id=link>
+          <textarea id="comment" name="comment"></textarea>
+        </div>
+        <input type="submit" value="완료">
+      </form><br/><br/><br/>
+
+        <%
+          if(comments) {
+            for(var i = 0; i < comments.length; i++) {
+              var oneItem = comments[i];
+        %>
+        <table class="table">
             <tr>
               <th>작성자</th>
-              <th name="name"><%=rows.name%></th>
+              <th><%=oneItem.name%></th>
+              <th>작성일</th>
+              <th><%=oneItem.update_date%></th>
             </tr>
             <tr>
-              <td>제목</td>
-              <td name="title"><%=rows.title%></td>
-            </tr>
-            <tr>
-              <td>작성일</td>
-              <td name="update_date"><%=rows.update_date%></td>
-            </tr>
-            <tr>
-              <td>조회수</td>
-              <td name="hit"><%=rows.hit%></td>
-            </tr>
-            <tr>
-              <td colspan="2" name="content" class="conversion"><%=rows.content%></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <% if(sess.idx === rows.user_idx) { %>
-                    <button type="submit" class="btn btn-primary">글 수정</button>
-                    <button type="button" class="btn btn-primary" onclick="checkDelete()">글 삭제</button>
-                    <% }
-                    if(page){ %>
-                      <button type="button" class="btn btn-default" onclick="location.href='/list/<%=page%>'">목록으로</button>
-                    <% } else { %>
-                    <button type="button" class="btn btn-default" onclick="location.href='/list/1'">목록으로</button>
-                    <% } %>
-                </td>
+              <td colspan="5" class="conversion"><%=oneItem.comment%></td>
             </tr>
         </table>
-    </form><br/><br/>
-
-    <form method="post" onsubmit="return checkSubmit()">
-      <div class="form-group">
-        <input type="hidden" id="ip" name="ip">
-        <input type="hidden" name="name" value="<%=sess.name%>">
-        <input type="hidden" name="counts" value="<%=rows.counts%>">
-        <input type="hidden" name="email" value="<%=email%>">
-        <input type="hidden" name="link" id=link>
-        <textarea id="comment" name="comment"></textarea>
-      </div>
-      <input type="submit" value="완료">
-    </form><br/><br/><br/>
-
-      <%
-        if(comments) {
-          for(var i = 0; i < comments.length; i++) {
-            var oneItem = comments[i];
-      %>
-      <table class="table">
-          <tr>
-            <th>작성자</th>
-            <th><%=oneItem.name%></th>
-            <th>작성일</th>
-            <th><%=oneItem.update_date%></th>
-          </tr>
-          <tr>
-            <td colspan="5" class="conversion"><%=oneItem.comment%></td>
-          </tr>
-      </table>
-      <% }} %>
+        <% }} %>
+    </div>
       <script>
         $('.conversion').each(function(){
           var $this = $(this);

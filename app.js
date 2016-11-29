@@ -10,9 +10,15 @@ var app = express();
 var fs = require('fs');
 var flash = require("connect-flash");
 
-
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var er = require('./routes/er');
+var dlt = require('./routes/dlt');
+var list = require('./routes/list');
+var mypage = require('./routes/mypage');
+var read = require('./routes/read');
+var update = require('./routes/update');
+var write = require('./routes/write');
+var uploader = require('./routes/uploader');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -54,7 +60,14 @@ app.use(session({
 }));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/er', er);
+app.use('/mypage', mypage);
+app.use('/read', read);
+app.use('/update', update);
+app.use('/write', write);
+app.use('/list', list);
+app.use('/dlt', dlt);
+app.use('/uploader', uploader);
 
 // passport config
 app.use(passport.initialize());

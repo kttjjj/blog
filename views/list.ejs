@@ -3,95 +3,107 @@
   <head>
     <%include ./include/head_include.ejs %>
     <link rel="stylesheet" href="/stylesheets/list.css">
+    <link rel="stylesheet" href="/stylesheets/list_css.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <div class="container-fluid">
-    <%include ./include/index_include.ejs%>
-    <div class="row">
-        <div class="col-xs-12 title-wrapper">
-            <div class="col-xs-1 idx">번호</div>
-            <div class="col-xs-1 name">작성자</div>
-            <div class="col-xs-7 title">제목</div>
-            <div class="col-xs-1 hit">조회수</div>
-            <div class="col-xs-2 date">변경일</div>
-        </div>
+    <%include index.ejs%>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default panel-table">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col col-xs-12">
+                              <form action="/list/1" method="get">
+                                <select name="type" class="form-control">
+                                  <option value="title">제목</option>
+                                  <option value="content">내용</option>
+                                  <option value="name">작성자</option>
+                                  <option value="tag">테그</option>
+                                </select>
+                                <input width="200px" type="text" name="search" class="form-control input-text">
+                                <input type="submit" value="검색"  class="btn btn-sm btn-default input-button">
+                                <input type="button" value="전체보기" onclick="location.href='/list/1'"  class="btn btn-sm btn-default input-button">
+                                <button type="button" class="btn btn-sm btn-primary input-button" onclick="location.href='/write'">글쓰기</button>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped table-bordered table-list">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>이름</th>
+                                    <th>제목</th>
+                                    <th>조회수</th>
+                                    <th>작성일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <%
+                              for(var i = 0; i < rows.length; i++) {
+                                var oneItem = rows[i];
+                                if(rows[0].is_delete != 1) {
+                                  %>
+                                <tr>
+                                    <td><%=oneItem.idx%></td>
+                                    <td><%=oneItem.name%></td>
+                                    <td>
+                                      <a href="/read/<%=oneItem.idx%>/<%=oneItem.hit%>/<%=page%>">
+                                          <%=oneItem.title%> [<%=oneItem.counts%>]
+                                      </a>
+                                      <p><%=oneItem.tag%></p>
+                                    </td>
+                                    <td><%=oneItem.hit%></td>
+                                    <td><%=oneItem.update_date%></td>
+                                </tr>
+                                <% }} %>
+                            </tbody>
+                        </table>
 
-        <%
-            for(var i = 0; i < rows.length; i++) {
-              var oneItem = rows[i];
-              if(rows[0].is_delete != 1) {
-          %>
-                <div class="col-xs-12 list-wrapper">
-                    <div class="col-xs-1 text-center idx">
-                        <%=oneItem.idx%>
                     </div>
-                    <div class="col-xs-1 text-center name">
-                        <%=oneItem.name%>
-                    </div>
-                    <div class="col-xs-7 list-title">
-                        <a href="/read/<%=oneItem.idx%>/<%=oneItem.hit%>/<%=page%>">
-                            <%=oneItem.title%> [<%=oneItem.counts%>]
-                        </a>
-                        <%=oneItem.tag%>
-                    </div>
-                    <div class="col-xs-1 text-center hit">
-                        <%=oneItem.hit%>
-                    </div>
-                    <div class="col-xs-2 text-center date">
-                        <%=oneItem.update_date%>
+                    <div class="panel-footer">
+                      <%
+                        if(search != undefined) {
+                      %>
+                        <ul class="pagination hidden-xs pull-center">
+                            <li><a href="/list/1?type=<%=type%>&search=<%=search%>"><<<</a></li>
+                            <li><a href="/list/<%=page - 1%>?type=<%=type%>&search=<%=search%>">이전</a></li>
+                            <%
+                            for(i = startPage; i <= endPage; i++) {
+                              if(rows[0].is_delete != 1) {
+                                if(page == i) { %>
+                                <li><a><%=i%></a></li>
+                              <%  } else { %>
+                            <li> <a href="/list/<%=i%>?type=<%=type%>&search=<%=search%>"><%=i%></a></li>
+                            <%  }}} %>
+                            <li><a href="/list/<%=page + 1%>?type=<%=type%>&search=<%=search%>">다음</a></li>
+                            <li><a href="/list/<%=totalPage%>?type=<%=type%>&search=<%=search%>">>>></a></li>
+                        </ul>
+                        <%
+                        } else {
+                        %>
+                        <ul class="pagination hidden-xs pull-center">
+                            <li><a href="/list/1"><<<</a></li>
+                            <li><a href="/list/<%=page - 1%>">이전</a></li>
+                            <%
+                            for(i = startPage; i <= endPage; i++) {
+                              if(rows[0].is_delete != 1) {
+                                if(page == i) { %>
+                                  <li><a><%=i%></a></li>
+                              <%  } else { %>
+                            <li><a href="/list/<%=i%>"><%=i%></a></li>
+                            <%  }}} %>
+                            <li>  <a href="/list/<%=page + 1%>">다음</a></li>
+                            <li><a href="/list/<%=totalPage%>">>>></a></li>
+                        </ul>
+                        <%}%>
                     </div>
                 </div>
-          <% }} %>
-
-      <div div class="col-xs-12">
-        <div align="center" class="col-xs-12">
-          <%
-            if(search != undefined) {
-          %>
-              <a href="/list/1?type=<%=type%>&search=<%=search%>"><<<</a>
-              <a href="/list/<%=page - 1%>?type=<%=type%>&search=<%=search%>">이전</a>
-              <%
-              for(i = startPage; i <= endPage; i++) {
-                if(rows[0].is_delete != 1) {
-                  if(page == i) { %>
-                    [<%=i%>]
-                <%  } else { %>
-                    <a href="/list/<%=i%>?type=<%=type%>&search=<%=search%>">[<%=i%>]</a>
-                    <%  }}} %>
-                    <a href="/list/<%=page + 1%>?type=<%=type%>&search=<%=search%>">다음</a>
-                    <a href="/list/<%=totalPage%>?type=<%=type%>&search=<%=search%>">>>></a>
-            <%
-            } else {
-            %>
-            <a href="/list/1"><<<</a>
-            <a href="/list/<%=page - 1%>">이전</a>
-            <%
-            for(i = startPage; i <= endPage; i++) {
-              if(rows[0].is_delete != 1) {
-                if(page == i) { %>
-                  [<%=i%>]
-              <%  } else { %>
-                  <a href="/list/<%=i%>">[<%=i%>]</a>
-                  <%  }}} %>
-                  <a href="/list/<%=page + 1%>">다음</a>
-                  <a href="/list/<%=totalPage%>">>>></a>
-            <%}%>
-
+            </div>
         </div>
-      </div>
-    </div>
-
-    <form action="/list/1" method="get">
-      <select name="type" class="form-control select-size">
-        <option value="title">제목</option>
-        <option value="content">내용</option>
-        <option value="name">작성자</option>
-        <option value="tag">테그</option>
-      </select>
-      <input width="200px" type="text" name="search" class="form-control input-text">
-      <input type="submit" value="검색"  class="btn btn-default input-button">
-      <input type="button" value="전체보기" onclick="location.href='/list/1'"  class="btn btn-default input-button">
-    </form>
     </div>
   </body>
 </html>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/stylesheets/list.css">
   </head>
   <body>
-    <%include ./include/index_include.ejs%>
+    <%include index.ejs%>
     <div class="container-fluid">
       <div class="write-row">
         <form method="post" onsubmit="return checkSubmit()">
@@ -49,7 +49,7 @@
 
 
       function tagsearcher(e){
-        
+
         var input = document.getElementById("taginput").value;
         var text = "";
         var textvalue = "";
@@ -72,7 +72,7 @@
                   outTagList.push(tagList[i]);
                   document.getElementById('taginput').value = "";
                   document.getElementById('taginput').focus();
-                  
+
                 }
               }
             }

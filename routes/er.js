@@ -8,22 +8,6 @@ var multipartMiddleware = multipart();
 var nodemailer = require('nodemailer');
 var smtpchange = require('nodemailer-smtp-transport');
 
-var pool = mysql.createPool({
-    connectionLimit: 3,
-    host: 'ktj.ceudwvegpor3.ap-northeast-2.rds.amazonaws.com',
-    user: 'root',
-    database: 'blog',
-    password: 'aaff7523'
-});
-
-var smtpTransport = nodemailer.createTransport(smtpchange({
-    service: 'Gmail',
-    auth: {
-        user: 'jumpeggsmtp@gmail.com',
-        pass: '1234qwerasdf'
-    }
-}));
-
 // 세션 체크 함수
 function checkSession(req) {
     var sess = false;
@@ -33,12 +17,16 @@ function checkSession(req) {
     return sess;
 }
 
-//메인 페이지
-router.get('/', function(req, res, next) {
-    var sess = checkSession(req);
-    res.render('index', {
-        sess: sess
-    });
+var smtpTransport = nodemailer.createTransport(smtpchange({
+    service: 'Gmail',
+    auth: {
+        user: 'jumpeggsmtp@gmail.com',
+        pass: '1234qwerasdf'
+    }
+}));
+
+router.get('/', function(req,res){
+    res.render('err');
 });
 
 module.exports = router;

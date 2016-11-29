@@ -1,53 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<%include ./include/head_include.ejs %>
-	<link rel="stylesheet" href="/stylesheets/list.css">
-	<script
-		src="https://code.jquery.com/jquery-1.12.4.min.js"
-		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-		crossorigin="anonymous"></script>
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="/stylesheets/list.css">
+		<link rel="stylesheet" href="/stylesheets/login_css.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 
 <body>
-	<%include ./include/index_include.ejs%>
-	<div class="login-row">
-		<form action="/login" method="POST" class="login-form">
-			<div class="loginWrapper">
-				<div>
-					<input type="text" name="email" placeholder="E-Mail" class="form-control">
-				</div>
-				<div class="login-pass">
-					<input type="password" name="passwd" placeholder="PASSWORD" class="form-control">
-				</div>
-			</div>
-			<div class="oauth-btnBox">
-				<button class="login_btn btn btn-default"  type="submit">Login</button>
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Sign-up</button>
-			</div>
-			<div class="oauth-btnBox">
-				<button type="button" class="btn btn-primary" onclick="location.href='/auth/facebook'">Facebook login</button>
-			</div>
-			<div class="oauth-btnBox">
-				<button type="button" class="btn btn-primary" onclick="location.href='/auth/google'">Google login</button>
-			</div>
-		</form>
+	<%include index.ejs%>
+		<div class="container">
 
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">회원 가입</h4>
+
+			<div class="omb_login">
+				<h3 class="omb_authTitle">Login or Sign up</h3>
+				<div class="row omb_row-sm-offset-3 omb_socialButtons sort">
+					<div class="col-xs-4 col-sm-2">
+						<a href="/auth/facebook" class="btn btn-lg btn-block omb_btn-facebook">
+							<i class="fa fa-facebook visible-xs"></i>
+							<span class="hidden-xs">Facebook</span>
+						</a>
 					</div>
+					<div class="col-xs-4 col-sm-2">
+						<a href="/auth/google" class="btn btn-lg btn-block omb_btn-google">
+							<i class="fa fa-google-plus visible-xs"></i>
+							<span class="hidden-xs">Google+</span>
+						</a>
+					</div>
+					<div class="col-xs-4 col-sm-2">
+							<i class="fa fa-google-plus visible-xs"></i>
+							<span class="btn btn-lg btn-block omb_btn-Sign-up" data-toggle="modal" data-target="#myModal">Sign-up</span>
+					</div>
+				</div>
 
-					<form name="signUpForm" action="/sign-up" method="post">
-						<div class="modal-body">
+				<div class="row omb_row-sm-offset-3 omb_loginOr">
+					<div class="col-xs-12 col-sm-6">
+						<hr class="omb_hrOr">
+						<span class="omb_spanOr">or</span>
+					</div>
+				</div>
+				<%
+					if(sess) {
+				%>
+						<button class="btn btn-lg btn-primary"  onclick="location.href='/logout'">Logout</button>
+			<% } else { %>
+			<div class="row omb_row-sm-offset-3">
+				<div class="col-xs-12 col-sm-6">
+					<form class="omb_loginForm" action="/login" autocomplete="off" method="POST">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" class="form-control" name="email" placeholder="email address">
+						</div>
+						<span class="help-block"></span>
+
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" class="form-control" name="passwd" placeholder="Password">
+						</div><br>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+					</form>
+				</div>
+			</div>
+			<% } %>
+				<!-- <div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-3">
+				<label class="checkbox">
+					<input type="checkbox" value="remember-me">Remember Me
+				</label>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<p class="omb_forgotPwd">
+					<a href="#">Forgot password?</a>
+				</p>
+			</div>
+		</div> -->
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-width modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">회원 가입</h4>
+						</div>
+
+						<form name="signUpForm" action="/sign-up" method="post">
+							<div class="modal-body">
 								<div>
 									<h4>Email <button type="button" class="btn btn-default">중복확인</button>	</h4>
 									<input type="text" name="email" placeholder="ID">
@@ -60,17 +103,18 @@
 									<h4>name</h4>
 									<input type="text" name="name" placeholder="Email">
 								</div>
-						</div>
+							</div>
 
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Sign-up</button>
-						</div>
-					</form>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">Sign-up</button>
+							</div>
+						</form>
 
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
+
 </html>

@@ -1,10 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <%include ./include/head_include.ejs %>
-    <link rel="stylesheet" href="/stylesheets/list.css">
-  </head>
-  <body>
-  <%include ./include/index_include.ejs%>
-  </body>
+    <link rel="stylesheet" href="/stylesheets/index_css.css">
+</head>
+
+<body>
+  <div id="thumbnail-preview-indicators" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#thumbnail-preview-indicators" data-slide-to="0" class="active">
+            <div class="thumbnail">
+              <img class="img-responsive" src="/images/login.jpg">
+            </div>
+          </li>
+          <li data-target="#thumbnail-preview-indicators" data-slide-to="1">
+          <div class="thumbnail">
+              <img class="img-responsive" src="/images/list.jpg">
+            </div>
+          </li>
+          <li data-target="#thumbnail-preview-indicators" data-slide-to="2">
+          <div class="thumbnail">
+              <img class="img-responsive" src="https://s3.amazonaws.com/ooomf-com-files/mtNrf7oxS4uSxTzMBWfQ_DSC_0043.jpg">
+            </div>
+          </li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item slides active">
+            <div class="slide-1"></div>
+            <div class="container">
+              <div class="carousel-caption">
+                <h1>로그인 페이지</h1>
+                <p>회원가입을 할 수 있으며 비밀번호는 bcrypt를 사용하여 암호화되어 저장</p>
+                <p>passport를 사용하여 google, facebook 로그인 사용 가능</p>
+                <p><a class="btn btn-lg btn-primary" href="/login" role="button">Login</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="item slides">
+            <div class="slide-2"></div>
+            <div class="container">
+              <div class="carousel-caption">
+                <h1>게시판</h1>
+                <p>내용, 제목, 작성자, 태그를 이용한 검색기능</p>
+                <p>게시판 글쓰기, 수정, 삭제 구현</p>
+                <p>ckeditor를 이용한 글쓰기, 이미지 업로드 및 codesnippet을 삽입하여 코드 삽입을 쉽게 만듬</p>
+                <p>댓글 작성시 원글 작성자에게 알림 메일 발송</p>
+                <p><a class="btn btn-lg btn-primary" href="/list/1" role="button">notice board</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="item slides">
+            <div class="slide-3"></div>
+            <div class="container">
+              <div class="carousel-caption">
+                <h1>My page</h1>
+                <p>구현중</p>
+                <p><a class="btn btn-lg btn-primary" href="" role="button">Browse gallery</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="left carousel-control" href="#thumbnail-preview-indicators" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#thumbnail-preview-indicators" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+
+</body>
+
 </html>

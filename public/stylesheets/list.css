@@ -45,10 +45,8 @@ body, html{
     color: #ce6700;
 }
 .container-fluid{
-    background-color: #D7D8EC;
     margin: 0px;
-    width: 100%;
-    margin-top: 95px;
+    width: 65%;
 }
 .idx{
     color: #6089b4;
@@ -89,8 +87,8 @@ body, html{
     height: 100%;
 
 }
-.modal-dialog{
-    width:380px;
+.modal-width{
+  width: 380px !important;
 }
 .modal-body{
 	padding-left: 35px;
@@ -114,8 +112,6 @@ body, html{
 }
 .write-row{
     margin-top: 150px;
-    margin-left: 200px;
-    margin-right: 200px;
 }
 .login-form{
     width: 250px;
