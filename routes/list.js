@@ -8,13 +8,13 @@ var multipartMiddleware = multipart();
 var nodemailer = require('nodemailer');
 var smtpchange = require('nodemailer-smtp-transport');
 
-var pool = mysql.createPool({
+var pool =  mysql.createPool({
     connectionLimit: 3,
     host: 'ktj.ceudwvegpor3.ap-northeast-2.rds.amazonaws.com',
     user: 'root',
     database: 'blog',
     password: 'aaff7523'
-});
+  });
 
 // 세션 체크 함수
 function checkSession(req) {
@@ -80,7 +80,7 @@ router.get('/:page', function(req, res, next) {
 
                 var begin = (page - 1) * size; // 시작 글
                 if(begin < 0) {
-                    begin = 0
+                    begin = 0;
                 }
                 var pageSize = 10; // 링크 갯수
                 var startPage = Math.floor((page - 1) / pageSize) * pageSize + 1;

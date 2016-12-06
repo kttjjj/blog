@@ -64,42 +64,46 @@
                         </table>
 
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer col col-xs-12">
                       <%
                         if(search != undefined) {
                       %>
-                        <ul class="pagination hidden-xs pull-center">
-                            <li><a href="/list/1?type=<%=type%>&search=<%=search%>"><<<</a></li>
-                            <li><a href="/list/<%=page - 1%>?type=<%=type%>&search=<%=search%>">이전</a></li>
-                            <%
-                            for(i = startPage; i <= endPage; i++) {
-                              if(rows[0].is_delete != 1) {
-                                if(page == i) { %>
-                                <li><a><%=i%></a></li>
-                              <%  } else { %>
-                            <li> <a href="/list/<%=i%>?type=<%=type%>&search=<%=search%>"><%=i%></a></li>
-                            <%  }}} %>
-                            <li><a href="/list/<%=page + 1%>?type=<%=type%>&search=<%=search%>">다음</a></li>
-                            <li><a href="/list/<%=totalPage%>?type=<%=type%>&search=<%=search%>">>>></a></li>
-                        </ul>
+                      <div style="text-align: center">
+                          <ul class="pagination hidden-xs pull-center">
+                              <li><a href="/list/1?type=<%=type%>&search=<%=search%>"><<<</a></li>
+                              <li><a href="/list/<%=page - 1%>?type=<%=type%>&search=<%=search%>">이전</a></li>
+                              <%
+                              for(i = startPage; i <= endPage; i++) {
+                                if(rows[0].is_delete != 1) {
+                                  if(page == i) { %>
+                                  <li><a><%=i%></a></li>
+                                <%  } else { %>
+                              <li> <a href="/list/<%=i%>?type=<%=type%>&search=<%=search%>"><%=i%></a></li>
+                              <%  }}} %>
+                              <li><a href="/list/<%=page + 1%>?type=<%=type%>&search=<%=search%>">다음</a></li>
+                              <li><a href="/list/<%=totalPage%>?type=<%=type%>&search=<%=search%>">>>></a></li>
+                          </ul>
+                      </div>
                         <%
                         } else {
                         %>
-                        <ul class="pagination hidden-xs pull-center">
-                            <li><a href="/list/1"><<<</a></li>
-                            <li><a href="/list/<%=page - 1%>">이전</a></li>
-                            <%
-                            for(i = startPage; i <= endPage; i++) {
-                              if(rows[0].is_delete != 1) {
-                                if(page == i) { %>
-                                  <li><a><%=i%></a></li>
-                              <%  } else { %>
-                            <li><a href="/list/<%=i%>"><%=i%></a></li>
-                            <%  }}} %>
-                            <li>  <a href="/list/<%=page + 1%>">다음</a></li>
-                            <li><a href="/list/<%=totalPage%>">>>></a></li>
-                        </ul>
-                        <%}%>
+                        <div style="text-align: center">
+                          <ul class="pagination">
+                              <li><a href="/list/1"><<<</a></li>
+                              <li><a href="/list/<%=page - 1%>">이전</a></li>
+                              <%
+                              for(i = startPage; i <= endPage; i++) {
+                                if(rows[0].is_delete != 1) {
+                                  if(page == i) { %>
+                                    <li><a><%=i%></a></li>
+                                <%  } else { %>
+                              <li><a href="/list/<%=i%>"><%=i%></a></li>
+                              <%  }}} %>
+                              <li>  <a href="/list/<%=page + 1%>">다음</a></li>
+                              <li><a href="/list/<%=totalPage%>">>>></a></li>
+                          </ul>
+                          <%}%>
+                      </div>
                     </div>
                 </div>
             </div>

@@ -35,27 +35,8 @@ var smtpTransport = nodemailer.createTransport(smtpchange({
 
 router.get('/', function (req, res) {
   var sess = checkSession(req);
-  if (sess) {
-    res.redirect('/err');
-  }
-  var email = sess.email;
-  pool.getConnection(function (err, connection) {
-    if (err) {
-        console.error("커넥션 에러 : " + err);
-    }
-    var sql = "select *from user where email=?";
-    connection.query(sql, email, function(err, rows) {
-        if (err) {
-            console.error('select err : ' + err);
-        }
-        console.log("user 조회 결과 : " + rows[0]);
-
-        connection.release();
-        res.render('mypage', {
-          sess: sess,
-          rows: rows
-        });
-    });
+  res.render('news', {
+    sess: sess
   });
 });
 

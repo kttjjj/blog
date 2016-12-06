@@ -1,45 +1,45 @@
 {
-    "name": "blog",
-    "version": "0.0.0",
-    "private": true,
-    "scripts": {
-        "start": "node ./bin/www"
-    },
-    "dependencies": {
-        "bcrypt-nodejs": "0.0.3",
-        "body-parser": "~1.15.1",
-        "ckeditor": "^4.5.11",
-        "connect-flash": "^0.1.1",
-        "cookie-parser": "~1.4.3",
-        "date-utils": "^1.2.21",
-        "debug": "~2.2.0",
-        "ejs": "~2.4.1",
-        "express": "~4.13.4",
-        "express-session": "^1.14.2",
-        "formidable": "^1.0.17",
-        "morgan": "~1.7.0",
-        "mysql": "^2.12.0",
-        "nodemailer": "^2.6.4",
-        "nodemailer-smtp-transport": "^2.7.2",
-        "nodemon": "^1.11.0",
-        "passport": "^0.3.2",
-        "passport-facebook": "^2.1.1",
-        "passport-google-oauth": "^1.0.0",
-        "passport-local": "^1.0.0",
-        "serve-favicon": "~2.3.0",
-        "supervisor": "^0.11.0"
-    },
-    "main": "app.js",
-    "devDependencies": {},
-    "author": "",
-    "license": "ISC",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/kttjjj/blog.git"
-    },
-    "bugs": {
-        "url": "https://github.com/kttjjj/blog/issues"
-    },
-    "homepage": "https://github.com/kttjjj/blog#readme",
-    "description": ""
+  "name": "blog",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "~1.15.1",
+    "ckeditor": "^4.5.11",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.3",
+    "date-utils": "^1.2.21",
+    "debug": "~2.2.0",
+    "ejs": "~2.4.1",
+    "express": "~4.13.4",
+    "express-session": "^1.14.2",
+    "formidable": "^1.0.17",
+    "morgan": "~1.7.0",
+    "mysql": "^2.12.0",
+    "nodemailer": "^2.6.4",
+    "nodemailer-smtp-transport": "^2.7.2",
+    "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.3.0",
+    "supervisor": "^0.11.0"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kttjjj/blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kttjjj/blog/issues"
+  },
+  "homepage": "https://github.com/kttjjj/blog#readme",
+  "description": ""
 }

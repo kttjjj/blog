@@ -1,33 +1,40 @@
-body, html{
+body, html {
     height: 100%;
 }
-.title-wrapper{
+
+.title-wrapper {
     border-bottom: 1px solid black;
     margin-bottom: 5px;
     padding-bottom: 5px;
     text-align: center;
 }
-.list-wrapper{
+
+.list-wrapper {
     margin-bottom: 5px;
     padding-bottom: 5px;
 }
-.text-center{
+
+.text-center {
     text-align: center;
 }
-.input-text{
+
+.input-text {
     width: 200px;
     display: inline;
     height: 30px;
 }
-.input-button{
+
+.input-button {
     padding: 3px;
 }
-.select-size{
+
+.select-size {
     width: 100px;
     display: inline;
     padding: 0px;
 }
-.fixed{
+
+.fixed {
     position: fixed;
     top: 0;
     left: 0;
@@ -38,63 +45,78 @@ body, html{
     padding-right: 150px;
     padding-left: 150px;
 }
-.list-title{
+
+.list-title {
     color: #928367;
 }
-.list-title>a{
+
+.list-title>a {
     color: #ce6700;
 }
-.container-fluid{
+
+.container-fluid {
     margin: 0px;
     width: 65%;
 }
-.idx{
+
+.idx {
     color: #6089b4;
 }
-.name{
+
+.name {
     color: #d0b344;
 }
-.hit{
+
+.hit {
     color: #9aa82d;
 }
-.date{
+
+.date {
     color: #987295;
 }
-.fixed>h1{
+
+.fixed>h1 {
     color: white;
     font-size: 80px;
 }
-.button{
+
+.button {
     background-color: #607a80;
     color: white;
     float: right;
     margin-right: 8px;
 }
-.title{
+
+.title {
     color: #ce6700;
 }
-.row{
+
+.row {
     padding-top: 70px;
     padding-left: 150px;
     padding-right: 150px;
 }
-.left{
+
+.left {
     float: left;
 }
-.login-row{
+
+.login-row {
     padding-top: 300px;
     background-color: #D7D8EC;
     height: 100%;
+}
 
+.modal-width {
+    width: 380px !important;
 }
-.modal-width{
-  width: 380px !important;
+
+.modal-body {
+    padding-left: 35px;
+    padding-right: 35px;
 }
-.modal-body{
-	padding-left: 35px;
-	padding-right: 35px;
-}
-.modal-body input{
+
+.modal-body input {
     width: 300px;
     height: 40px;
     border: 1px solid gray;
@@ -103,26 +125,38 @@ body, html{
     padding: 3px;
     padding-left: 10px;
 }
-.modal-footer{
+
+.modal-footer {
     text-align: center;
 }
-.modal-footer button{
-    width:150px;
+
+.modal-footer button {
+    width: 150px;
     height: 40px;
 }
-.write-row{
+
+.write-row {
     margin-top: 150px;
 }
-.login-form{
+
+.login-form {
     width: 250px;
     /*position: relative;
     left: 50%;
     margin-left: -190px;*/
     margin: 0px auto;
 }
-.oauth-btnBox{
+
+.oauth-btnBox {
     margin-top: 5px;
 }
-.login-pass{
+
+.login-pass {
     margin-top: 5px;
+}
+
+.position {
+  width:200px;
+  margin-left: 340px;
+  margin-top: 50px;
 }
