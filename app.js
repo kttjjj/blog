@@ -40,8 +40,8 @@ var passport = require('passport');
 var bcrypt = require('bcrypt-nodejs');
 var salt = bcrypt.genSaltSync(33);
 
-app.listen(3000, function() {
-    console.log('listening on port 3000!');
+app.listen(4000, function() {
+    console.log('listening on port 4000!');
 });
 
 // mysql config
@@ -116,7 +116,7 @@ passport.use('facebook',
     new FacebookStrategy({
             clientID: '362620347422367',
             clientSecret: '2a6898d4caa3d48877e57a47859a3d6b',
-            callbackURL: "http://52.78.233.194:3000/auth/facebook/callback",
+            callbackURL: "/auth/facebook/callback",
             profileFields: ['displayName', 'emails']
         },
         function(accessToken, refreshToken, profile, done) {
@@ -141,7 +141,6 @@ passport.use('facebook',
                             done(null, false, req.flash('message', '이메일이 등록된 아이디로 로그인해주세요'));
                         }
                     });
-
             }
         }));
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -149,7 +148,7 @@ passport.use('google',
     new GoogleStrategy({
             clientID: '692989383748-mbjh6qqmm2jo2ndl5t68i59hk3kelkpr.apps.googleusercontent.com',
             clientSecret: '5d4Mr7fjsUAre1k4DULfiWOY',
-            callbackURL: "http://52.78.233.194:3000/auth/google/callback"
+            callbackURL: "/auth/google/callback"
         },
         function(token, tokenSecret, profile, done) {
             mysqlClient.query('select * from user where email = ?', [profile.emails[0].value],
@@ -232,7 +231,7 @@ app.get('/auth/facebook', passport.authenticate('facebook', {
 
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: 'http://52.78.233.194:3000/',
+        successRedirect: '/',
         failureRedirect: '/fail',
         failureFlash: true
     }));
@@ -243,7 +242,7 @@ app.get('/auth/google', passport.authenticate('google', {
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://52.78.233.194:3000/',
+        successRedirect: '/',
         failureRedirect: '/fail'
     }));
 
