@@ -111,7 +111,7 @@ passport.use('local',
                 });
         })
 );
-var FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use('facebook',
     new FacebookStrategy({
             clientID: '362620347422367',
@@ -144,7 +144,7 @@ passport.use('facebook',
 
             }
         }));
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 passport.use('google',
     new GoogleStrategy({
             clientID: '692989383748-mbjh6qqmm2jo2ndl5t68i59hk3kelkpr.apps.googleusercontent.com',
