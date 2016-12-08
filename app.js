@@ -199,8 +199,8 @@ app.get('/login', function(req, res, next) {
 });
 
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/fail',
+    successRedirect: 'http://52.78.233.194:3000/',
+    failureRedirect: 'http://52.78.233.194:3000/fail',
     failureFlash: false
 }));
 
