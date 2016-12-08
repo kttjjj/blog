@@ -14,7 +14,7 @@ const routes = require('./routes/index');
 const er = require('./routes/er');
 const dlt = require('./routes/dlt');
 const list = require('./routes/list');
-const news = require('./routes/news');
+const Cnews = require('./routes/Cnews');
 const read = require('./routes/read');
 const update = require('./routes/update');
 const write = require('./routes/write');
@@ -61,7 +61,7 @@ app.use(session({
 
 app.use('/', routes);
 app.use('/er', er);
-app.use('/news', news);
+app.use('/Cnews', Cnews);
 app.use('/read', read);
 app.use('/update', update);
 app.use('/write', write);
