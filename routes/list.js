@@ -1,14 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const mysql = require('mysql');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart();
-const nodemailer = require('nodemailer');
-const smtpchange = require('nodemailer-smtp-transport');
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+var nodemailer = require('nodemailer');
+var smtpchange = require('nodemailer-smtp-transport');
 
-const pool =  mysql.createPool({
+var pool =  mysql.createPool({
     connectionLimit: 3,
     host: 'ktj.ceudwvegpor3.ap-northeast-2.rds.amazonaws.com',
     user: 'root',
@@ -35,12 +35,12 @@ var smtpTransport = nodemailer.createTransport(smtpchange({
 
 // 게시판 목록 불러오는 페이지
 router.get('/:page', function(req, res, next) {
-    let sess = checkSession(req);
-    let search = "";
-    let page = Number(req.params.page);
-    let type = req.query.type;
-    let cntsql;
-    let selectsql;
+    var sess = checkSession(req);
+    var search = "";
+    var page = Number(req.params.page);
+    var type = req.query.type;
+    var cntsql;
+    var selectsql;
     search = req.query.search;
 
     if (search === undefined) {
@@ -59,7 +59,7 @@ router.get('/:page', function(req, res, next) {
         if (err) {
             console.error('connection err : ' + err);
         }
-        let sql = "select * from board;";
+        var sql = "select * from board;";
         connection.query(sql, [], function(err, rows) {
             if (err) {
                 console.error('err : ' + err);
@@ -70,27 +70,27 @@ router.get('/:page', function(req, res, next) {
                     console.error('cntsql err : ' + err);
                 }
                 console.log("rows : " + rows); //[{cnt:1}]
-                let cnt = rows[0].cnt;
-                let size = 20; // 보여줄 글의 수
-                let totalPage = Math.ceil(cnt / size);
+                var cnt = rows[0].cnt;
+                var size = 20; // 보여줄 글의 수
+                var totalPage = Math.ceil(cnt / size);
 
                 if (page >= totalPage || page < 1) {
                     page = totalPage;
                 }
 
-                let begin = (page - 1) * size; // 시작 글
+                var begin = (page - 1) * size; // 시작 글
                 if(begin < 0) {
                     begin = 0;
                 }
-                let pageSize = 10; // 링크 갯수
-                let startPage = Math.floor((page - 1) / pageSize) * pageSize + 1;
-                let endPage = startPage + (pageSize - 1);
+                var pageSize = 10; // 링크 갯수
+                var startPage = Math.floor((page - 1) / pageSize) * pageSize + 1;
+                var endPage = startPage + (pageSize - 1);
 
                 if (endPage > totalPage) {
                     endPage = totalPage;
                 }
 
-                let max = cnt - ((page - 1) * size);
+                var max = cnt - ((page - 1) * size);
 
                 connection.query(selectsql, [begin, size], function(err, rows) {
                     if (err) {

@@ -1,14 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const mysql = require('mysql');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart();
-const nodemailer = require('nodemailer');
-const smtpchange = require('nodemailer-smtp-transport');
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+var nodemailer = require('nodemailer');
+var smtpchange = require('nodemailer-smtp-transport');
 
-const pool = mysql.createPool({
+var pool = mysql.createPool({
     connectionLimit: 3,
     host: 'ktj.ceudwvegpor3.ap-northeast-2.rds.amazonaws.com',
     user: 'root',

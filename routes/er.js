@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const mysql = require('mysql');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart();
-const nodemailer = require('nodemailer');
-const smtpchange = require('nodemailer-smtp-transport');
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+var nodemailer = require('nodemailer');
+var smtpchange = require('nodemailer-smtp-transport');
 
 // 세션 체크 함수
 function checkSession(req) {
