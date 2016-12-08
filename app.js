@@ -1,24 +1,24 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mysql = require('mysql');
-var session = require('express-session');
-var app = express();
-var fs = require('fs');
-var flash = require("connect-flash");
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const session = require('express-session');
+const app = express();
+const fs = require('fs');
+const flash = require("connect-flash");
 
-var routes = require('./routes/index');
-var er = require('./routes/er');
-var dlt = require('./routes/dlt');
-var list = require('./routes/list');
-var news = require('./routes/news');
-var read = require('./routes/read');
-var update = require('./routes/update');
-var write = require('./routes/write');
-var uploader = require('./routes/uploader');
+const routes = require('./routes/index');
+const er = require('./routes/er');
+const dlt = require('./routes/dlt');
+const list = require('./routes/list');
+const news = require('./routes/news');
+const read = require('./routes/read');
+const update = require('./routes/update');
+const write = require('./routes/write');
+const uploader = require('./routes/uploader');
 
 // view engine setups
 app.set('views', path.join(__dirname, 'views'));
@@ -36,16 +36,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
 // login modules
-var passport = require('passport');
-var bcrypt = require('bcrypt-nodejs');
-var salt = bcrypt.genSaltSync(33);
+const passport = require('passport');
+const bcrypt = require('bcrypt-nodejs');
+const salt = bcrypt.genSaltSync(33);
 
 app.listen(3000, function() {
     console.log('listening on port 3000!');
 });
 
 // mysql config
-var mysqlClient = mysql.createConnection({
+const mysqlClient = mysql.createConnection({
     host: 'ktj.ceudwvegpor3.ap-northeast-2.rds.amazonaws.com',
     user: 'root',
     password: 'aaff7523',
@@ -84,7 +84,7 @@ passport.deserializeUser(function(user, done) {
 });
 
 // passport LoginStrategy
-var LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 passport.use('local',
     new LocalStrategy({
             usernameField: 'email',
@@ -111,7 +111,7 @@ passport.use('local',
                 });
         })
 );
-var FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use('facebook',
     new FacebookStrategy({
             clientID: '362620347422367',
@@ -129,7 +129,7 @@ passport.use('facebook',
                                     if (error) {
                                         console.log(error);
                                     } else {
-                                        var user = {
+                                        let user = {
                                             name: profile.displayName,
                                             email: profile.emails[0].value
                                         };
@@ -144,7 +144,7 @@ passport.use('facebook',
 
             }
         }));
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 passport.use('google',
     new GoogleStrategy({
             clientID: '692989383748-mbjh6qqmm2jo2ndl5t68i59hk3kelkpr.apps.googleusercontent.com',
@@ -160,7 +160,7 @@ passport.use('google',
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    var user = {
+                                    let user = {
                                         name: profile.displayName,
                                         email: profile.emails[0].value
                                     };
@@ -175,7 +175,7 @@ passport.use('google',
         }
     ));
 
-var isAuthenticated = function(req, res, next) {
+const isAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
@@ -192,7 +192,7 @@ function checkSession(req) {
 
 // login router
 app.get('/login', function(req, res, next) {
-    var sess = checkSession(req);
+    let sess = checkSession(req);
     res.render('login',{
         sess: sess
     });
@@ -205,7 +205,7 @@ app.post('/login', passport.authenticate('local', {
 }));
 
 app.get('/fail', function(req, res, next) {
-    var message = "다시 시도해 주세요.";
+    let message = "다시 시도해 주세요.";
     res.render('fail',{
         message: message
     });
@@ -254,7 +254,7 @@ app.get('/auth/google/callback',
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
