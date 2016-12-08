@@ -45,7 +45,7 @@ app.listen(3000, function() {
 });
 
 // mysql config
-const mysqlClient = mysql.createConnection({
+var mysqlClient = mysql.createConnection({
     host: 'ktj.ceudwvegpor3.ap-northeast-2.rds.amazonaws.com',
     user: 'root',
     password: 'aaff7523',
@@ -84,7 +84,7 @@ passport.deserializeUser(function(user, done) {
 });
 
 // passport LoginStrategy
-const LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 passport.use('local',
     new LocalStrategy({
             usernameField: 'email',
@@ -111,12 +111,12 @@ passport.use('local',
                 });
         })
 );
-const FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use('facebook',
     new FacebookStrategy({
             clientID: '362620347422367',
             clientSecret: '2a6898d4caa3d48877e57a47859a3d6b',
-            callbackURL: "http://localhost:3000/auth/facebook/callback",
+            callbackURL: "http://52.78.233.194:3000/auth/facebook/callback",
             profileFields: ['displayName', 'emails']
         },
         function(accessToken, refreshToken, profile, done) {
@@ -144,12 +144,12 @@ passport.use('facebook',
 
             }
         }));
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 passport.use('google',
     new GoogleStrategy({
             clientID: '692989383748-mbjh6qqmm2jo2ndl5t68i59hk3kelkpr.apps.googleusercontent.com',
             clientSecret: '5d4Mr7fjsUAre1k4DULfiWOY',
-            callbackURL: "http://localhost:3000/auth/google/callback"
+            callbackURL: "http://52.78.233.194:3000/auth/google/callback"
         },
         function(token, tokenSecret, profile, done) {
             mysqlClient.query('select * from user where email = ?', [profile.emails[0].value],
@@ -175,7 +175,7 @@ passport.use('google',
         }
     ));
 
-const isAuthenticated = function(req, res, next) {
+var isAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
@@ -192,20 +192,20 @@ function checkSession(req) {
 
 // login router
 app.get('/login', function(req, res, next) {
-    let sess = checkSession(req);
+    var sess = checkSession(req);
     res.render('login',{
         sess: sess
     });
 });
 
 app.post('/login', passport.authenticate('local', {
-    successRedirect: 'http://52.78.233.194:3000/',
-    failureRedirect: 'http://52.78.233.194:3000/fail',
+    successRedirect: '/',
+    failureRedirect: '/fail',
     failureFlash: false
 }));
 
 app.get('/fail', function(req, res, next) {
-    let message = "다시 시도해 주세요.";
+    var message = "다시 시도해 주세요.";
     res.render('fail',{
         message: message
     });
@@ -254,7 +254,7 @@ app.get('/auth/google/callback',
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    let err = new Error('Not Found');
+    var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
