@@ -1,24 +1,24 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
-const session = require('express-session');
-const app = express();
-const fs = require('fs');
-const flash = require("connect-flash");
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var mysql = require('mysql');
+var session = require('express-session');
+var app = express();
+var fs = require('fs');
+var flash = require("connect-flash");
 
-const routes = require('./routes/index');
-const er = require('./routes/er');
-const dlt = require('./routes/dlt');
-const list = require('./routes/list');
-const Cnews = require('./routes/Cnews');
-const read = require('./routes/read');
-const update = require('./routes/update');
-const write = require('./routes/write');
-const uploader = require('./routes/uploader');
+var routes = require('./routes/index');
+var er = require('./routes/er');
+var dlt = require('./routes/dlt');
+var list = require('./routes/list');
+var Cnews = require('./routes/Cnews');
+var read = require('./routes/read');
+var update = require('./routes/update');
+var write = require('./routes/write');
+var uploader = require('./routes/uploader');
 
 // view engine setups
 app.set('views', path.join(__dirname, 'views'));
@@ -36,9 +36,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
 // login modules
-const passport = require('passport');
-const bcrypt = require('bcrypt-nodejs');
-const salt = bcrypt.genSaltSync(33);
+var passport = require('passport');
+var bcrypt = require('bcrypt-nodejs');
+var salt = bcrypt.genSaltSync(33);
 
 app.listen(3000, function() {
     console.log('listening on port 3000!');
@@ -111,12 +111,12 @@ passport.use('local',
                 });
         })
 );
-const FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use('facebook',
     new FacebookStrategy({
             clientID: '362620347422367',
             clientSecret: '2a6898d4caa3d48877e57a47859a3d6b',
-            callbackURL: "/auth/facebook/callback",
+            callbackURL: "http://52.78.233.194:3000/auth/facebook/callback",
             profileFields: ['displayName', 'emails']
         },
         function(accessToken, refreshToken, profile, done) {
@@ -144,12 +144,12 @@ passport.use('facebook',
 
             }
         }));
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 passport.use('google',
     new GoogleStrategy({
             clientID: '692989383748-mbjh6qqmm2jo2ndl5t68i59hk3kelkpr.apps.googleusercontent.com',
             clientSecret: '5d4Mr7fjsUAre1k4DULfiWOY',
-            callbackURL: "/auth/google/callback"
+            callbackURL: "http://52.78.233.194:3000/auth/google/callback"
         },
         function(token, tokenSecret, profile, done) {
             mysqlClient.query('select * from user where email = ?', [profile.emails[0].value],
@@ -232,7 +232,7 @@ app.get('/auth/facebook', passport.authenticate('facebook', {
 
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/',
+        successRedirect: 'http://52.78.233.194:3000/',
         failureRedirect: '/fail',
         failureFlash: true
     }));
@@ -243,7 +243,7 @@ app.get('/auth/google', passport.authenticate('google', {
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: '/',
+        successRedirect: 'http://52.78.233.194:3000/',
         failureRedirect: '/fail'
     }));
 
