@@ -35,7 +35,7 @@ var smtpTransport = nodemailer.createTransport(smtpchange({
 
 router.get('/', function (req, res) {
   var sess = checkSession(req);
-  res.render('Cnews', {
+  res.render('news', {
     sess: sess
   });
 });

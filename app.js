@@ -14,7 +14,7 @@ var routes = require('./routes/index');
 var er = require('./routes/er');
 var dlt = require('./routes/dlt');
 var list = require('./routes/list');
-var Cnews = require('./routes/Cnews');
+var news = require('./routes/news');
 var read = require('./routes/read');
 var update = require('./routes/update');
 var write = require('./routes/write');
@@ -61,7 +61,7 @@ app.use(session({
 
 app.use('/', routes);
 app.use('/er', er);
-app.use('/Cnews', Cnews);
+app.use('/news', news);
 app.use('/read', read);
 app.use('/update', update);
 app.use('/write', write);
