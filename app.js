@@ -40,8 +40,8 @@ var passport = require('passport');
 var bcrypt = require('bcrypt-nodejs');
 var salt = bcrypt.genSaltSync(33);
 
-app.listen(4000, function() {
-    console.log('listening on port 4000!');
+app.listen(3000, function() {
+    console.log('listening on port 3000!');
 });
 
 // mysql config
