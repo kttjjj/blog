@@ -116,7 +116,7 @@ passport.use('facebook',
     new FacebookStrategy({
             clientID: '362620347422367',
             clientSecret: '2a6898d4caa3d48877e57a47859a3d6b',
-            callbackURL: "http://52.78.233.194:3000/auth/facebook/callback",
+            callbackURL: "/auth/facebook/callback",
             profileFields: ['displayName', 'emails']
         },
         function(accessToken, refreshToken, profile, done) {
@@ -129,7 +129,7 @@ passport.use('facebook',
                                     if (error) {
                                         console.log(error);
                                     } else {
-                                        let user = {
+                                        var user = {
                                             name: profile.displayName,
                                             email: profile.emails[0].value
                                         };
@@ -149,7 +149,7 @@ passport.use('google',
     new GoogleStrategy({
             clientID: '692989383748-mbjh6qqmm2jo2ndl5t68i59hk3kelkpr.apps.googleusercontent.com',
             clientSecret: '5d4Mr7fjsUAre1k4DULfiWOY',
-            callbackURL: "http://52.78.233.194:3000/auth/google/callback"
+            callbackURL: "/auth/google/callback"
         },
         function(token, tokenSecret, profile, done) {
             mysqlClient.query('select * from user where email = ?', [profile.emails[0].value],
@@ -160,7 +160,7 @@ passport.use('google',
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    let user = {
+                                    var user = {
                                         name: profile.displayName,
                                         email: profile.emails[0].value
                                     };
