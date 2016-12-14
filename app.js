@@ -114,8 +114,8 @@ passport.use('local',
 var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use('facebook',
     new FacebookStrategy({
-            clientID: '362620347422367',
-            clientSecret: '2a6898d4caa3d48877e57a47859a3d6b',
+            clientID: '962778913850142',
+            clientSecret: '139ca9993e515abc15047e511785268d',
             callbackURL: "/auth/facebook/callback",
             profileFields: ['displayName', 'emails']
         },
@@ -138,7 +138,7 @@ passport.use('facebook',
                                 }
                             );
                         } else {
-                            done(null, false, req.flash('message', '이메일이 등록된 아이디로 로그인해주세요'));
+                            done(null, result[0]);
                         }
                     });
             }
